@@ -14,12 +14,12 @@ import time
 
 def test_a():
     assert 1==1
-    
+#连通测试百度，返回状态码200    
 def test_baidu():
     resp=request(method="get",url="https://www.baidu.com")
     print(resp)
     assert resp.status_code==200
-    
+#天气接口api测试，获取json返回信息   
 def test_weatherapi():
     payload = {'area': '南京' }
 
@@ -32,7 +32,7 @@ def test_weatherapi():
     print(f'南京{time.localtime()[1]}月{time.localtime()[2]}日{city['night_air_temperature']}到{city['day_air_temperature']}℃ {city['day_weather']}转{city['night_weather']}')
     assert resp.json()['showapi_res_code']==0
     assert resp.json()['showapi_res_body']['cityInfo']['c5']=='南京'
-
+#webdriver配置
 @pytest.fixture
 def setup_driver():
     chromedriver_path = r"C:\Users\npcleishen2\.wdm\drivers\chromedriver\win64\138.0.7204.168\chromedriver-win32\chromedriver.exe"
@@ -42,7 +42,7 @@ def setup_driver():
     yield driver
     driver.quit()
 
-
+#切换窗口句柄测试
 def test_newpage(setup_driver):
     driver = setup_driver
     index = r"https://47f4201c.r2.cpolar.top"
@@ -57,7 +57,7 @@ def test_newpage(setup_driver):
             break
     assert driver.current_url == 'https://magento.softwaretestingboard.com/'
 
-
+#测试正确密码
 def test_truepwd(setup_driver):
     driver = setup_driver
     index = r"https://47f4201c.r2.cpolar.top"
